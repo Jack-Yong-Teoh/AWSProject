@@ -1,39 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Employee Information</title>
+	<style>
+		h1,h2,#btn_backToSearch{
+			font-family: Nunito Sans,sans-serif!important;
+			font-weight: 400;
+			font-style: normal;
+			color: #6a6a6a;
+			line-height: 1.65;
+			letter-spacing: 1px;
+			text-align: center;
+		}
+
+		#informationForm{
+			font-family: Nunito Sans,sans-serif!important;
+			font-weight: 400;
+			font-style: normal;
+			color: #6a6a6a;
+			line-height: 1.65;
+			letter-spacing: 1px;
+			text-align: justify;
+		}
+
+		#btn_backToSearch {
+			background-color: #1c77ff;
+			color: black;
+			padding: 12px;
+			margin: 10px 0;
+			border: none;
+			width: 100%;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 17px;
+			margin: 0;
+		}
+
+		#btn_backToSearch:hover {
+			background-color: #77b4fa;
+		}
+
+		.row {
+			display: -ms-flexbox; /* IE10 */
+			display: flex;
+			-ms-flex-wrap: wrap; /* IE10 */
+			flex-wrap: wrap;
+			margin: 0 0px;
+		}
+
+		.col-50 {
+			-ms-flex: 50%; /* IE10 */
+			flex: 50%;
+			margin-top: 50px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.col-30  {
+			-ms-flex: 30%; /* IE10 */
+			flex: 30%;
+		}
+
+		.col-70 {
+			-ms-flex: 70%; /* IE10 */
+			flex: 70%;
+		}
+
+		label {
+			margin-bottom: 10px;
+			display: block;
+			text-align: justify;
+		}
+		@media (max-width: 800px) {
+			.row {
+				flex-direction: column-reverse;
+			}
+			.col-25 {
+				margin-bottom: 20px;
+			}
+		}
+		
+	</style>
 </head>
 <center>
-	<font color="black" size="5" style="font-family: avenir">
+	<body style="width: 100%; 
+		height: 100vh; 
+		position: relative;
+		background: url(https://jackbucket01.s3.amazonaws.com/hero-bg.png);">
+			<div>
+				<h1 data-aos="zoom-in" style="font-weight: bold;color: DodgerBlue;">JJS HR Management System</h1>
+			
+				<form id="informationForm" action="/getempoutput" autocomplete="on" method = "GET"
+					style="background-color: #f2f2f2;
+					padding: 5px 20px 15px 20px;
+					border: 1px solid lightgrey;
+					border-radius: 3px;
+					height: 25em;
+					width: 40em">
+					<h2 data-aos="fade-up" style="font-weight: bold;">Employee Information</h2>
+					<div class="row">
+						<div class="col-30" style="margin-top: 0px; ">
+							<img src="{{ image_url }}" style="object-fit: contain;" width="100%"/>
+						</div>
 
-		<h1 style="color: DodgerBlue">Employee Information</h1>
+						<div class="col-70" style="margin-top: 0px; ">
+							<label style="font-weight: bold;">Employee ID:</label>
+							<label style="margin-top: -10px;">{{ id }} </label>
 
-		<body bgcolor="lightgrey">
+							<div class="row">
+								<div class="col-50" style="margin-top: 0px; ">
+									<label style="font-weight: bold;">First Name:</label>
+									<label style="margin-top: -10px;">{{ fname }}</label>
+								</div>
+								<div class="col-50" style="margin-top: 0px;">
+									<label style="font-weight: bold;">Last Name:</label> 
+									<label style="margin-top: -10px;">{{ lname }}</label>
+								</div>
+							</div>
 
-			<form>
-
-				<div>
-
-			  		Employee ID:<br> {{ id }} <br><br>
-
-			  		First Name:<br> {{ fname }} <br><br>
-
-			  		Last Name:<br> {{ lname }} <br><br>
-
-			  		Primary Interest:<br> {{ interest }} <br><br>
-
-			  		Location:<br> {{ location }} <br><br>
-
-			  		Image URL: <br> {{ image_url }} <br><br>
-
-			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="http://3.134.115.108:80/getemp">RESET</button><br><br>
-
-			  	</div>
-
-			</form>
-
-		</body>
-
-	</font>
+							<div class="row">
+								<div class="col-50" style="margin-top: 0px; ">
+									<label style="font-weight: bold;">Primary Interest:</label>
+									<label style="margin-top: -10px;">{{ interest }}</label>
+								</div>
+								<div class="col-50" style="margin-top: 0px; ">
+									<label style="font-weight: bold;">Location:</label>
+									<label style="margin-top: -10px;">{{ location }}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<button type="submit" id="btn_backToSearch" style="font-weight: bold" formaction="/">BACK TO UPDATE</button>
+				</form>
+			</div>
+	</body>
 </center>
 </html>
