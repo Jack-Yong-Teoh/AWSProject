@@ -40,19 +40,16 @@ def AddEmp():
     location = request.form['location']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
         return "Please select a file"
 
     try:
-
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
-        db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file-"+emp_image_file.filename
         s3 = boto3.resource('s3')
 
         try:
@@ -71,6 +68,9 @@ def AddEmp():
                 custombucket,
                 emp_image_file_name_in_s3)
 
+            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, object_url))
+            db_conn.commit()
+
         except Exception as e:
             return str(e)
 
@@ -78,8 +78,40 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('AddEmpOutput.html', name=emp_name)
+    return render_template('AddEmpOutput.html', id=emp_id,fname=first_name,lname=last_name,interest=pri_skill,location=location,image_url=object_url)
+
+
+@app.route("/getemp", methods=['POST'])
+def getEmp():
+    return render_template('GetEmp.html')
+
+@app.route("/fetchdata", methods=['GET', 'POST'])
+def EmpOutput():
+    emp_id = request.form['emp_id']
+
+    retrieve_sql="SELECT * FROM employee WHERE employee_id= " + emp_id + ";"
+    cursor = db_conn.cursor()
+ 
+    cursor.execute(retrieve_sql)
+    record = cursor.fetchall()
+    for row in record:
+        emp_id = row[0]
+        fname = row[1]
+        lname = row[2]
+        pri_skill = row[3]
+        location = row[4]
+        image = row[5]
+    cursor.close()
+
+    return render_template('GetEmpOutput.html', id=emp_id,fname=fname,lname=lname,interest=pri_skill,location=location,image_url=image)
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
+
+
+
+
+
+
+    
