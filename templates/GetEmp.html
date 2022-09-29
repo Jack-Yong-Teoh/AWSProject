@@ -1,29 +1,108 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Get Employee Information</title>
+	<style>
+		h1,h2,#btn_getEmp, #btn_update{
+			font-family: Nunito Sans,sans-serif!important;
+			font-weight: 400;
+			font-style: normal;
+			color: #6a6a6a;
+			line-height: 1.65;
+			letter-spacing: 1px;
+			text-align: center;
+		}
+
+		#fetchForm{
+			font-family: Nunito Sans,sans-serif!important;
+			font-weight: 400;
+			font-style: normal;
+			color: #6a6a6a;
+			line-height: 1.65;
+			letter-spacing: 1px;
+			
+		}
+
+		#btn_fetch {
+			background-color: #1c77ff;
+			color: black;
+			padding: 12px;
+			margin: 10px 0;
+			border: none;
+			width: 65%;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 17px;
+		}
+
+		#btn_fetch:hover {
+			background-color: #77b4fa;
+		}
+
+		#btn_backToUpdate {
+			background-color: #f75e5e;
+			color: black;
+			padding: 12px;
+			margin: 10px 0;
+			border: none;
+			width: 65%;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 17px;
+		}
+
+		#btn_backToUpdate:hover {
+			background-color: #faa6a6;
+		}
+
+		
+		* {
+			box-sizing: border-box;
+		}
+
+		input[type=text], input[type=number]{
+			width: 100%;
+			margin-bottom: 20px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+		}
+
+		label {
+			margin-bottom: 10px;
+			display: block;
+			text-align: justify;
+		}
+		
+	</style>
 </head>
 <center>
-	<font color="black" size="5" style="font-family: avenir">
+	<body style="width: 100%; 
+		height: 100vh; 
+		position: relative;
+		background: url(https://jackbucket01.s3.amazonaws.com/hero-bg.png);">
+		<div>
+			<h1 data-aos="zoom-in" style="font-weight: bold; color: DodgerBlue;">JJS HR Management System</h1>
+			<form id = "fetchForm"action="/fetchdata" autocomplete="on" method="POST"
+				style="background-color: #f2f2f2;
+				padding: 5px 20px 15px 20px;
+				border: 1px solid lightgrey;
+				border-radius: 3px;
+				height: 30em;
+				width: 35em">
+				<h2 style="font-weight: bold;">Enter Employee ID</h2><br>
 
-		<h1 style="color: DodgerBlue">Employee Information</h1>
-
-		<body bgcolor="lightgrey">
-
-			<form action="/fetchdata" autocomplete="on" method="POST">
-
-				<h2 style="color: grey">Enter Employee ID</h2>
-
-		  		Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
-
-
-		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>
-
-		  		<button type="submit" formaction="http://3.134.115.108:80/" style="background: white	; height: 45px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
-
+				<div>
+					<label>Employee ID</label>
+					<input type="number" name="emp_id">
+				</div>
+				<br>
+				<br>
+		  		<button type="submit" id="btn_fetch">FETCH INFO</button><br>
+				  <label style="text-align: center;">OR</label>
+		  		<button type="submit" id="btn_backToUpdate" formaction="/" method="GET">GO BACK TO UPDATE</button>
 			</form>
-
-		</body>
-	</font>
+		</div>
+	</body>
 </center>
 </html>
